@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 public class RequestParamController {
 
     @GetMapping("/foo")
-    public ParamsDto foo( @RequestParam(required = false, defaultValue = "Hola que tal", name="mensaje")
+    public ParamsDto foo( @RequestParam(required = false, defaultValue = "Hola que tal")
                             String message ) {
         ParamsDto param = new ParamsDto();
         param.setMessage(message);
