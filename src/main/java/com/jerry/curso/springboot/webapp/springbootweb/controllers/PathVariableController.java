@@ -1,6 +1,7 @@
 package com.jerry.curso.springboot.webapp.springbootweb.controllers;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -29,11 +30,16 @@ public class PathVariableController {
     // @Value("${config.message}")
     // private String message;
 
-    @Value("${config.listOfValues}")
-    private String[] listOfValues;
+    // @Value("${config.listOfValues}")
+    @Value("#{'${config.listOfValues}'.toUpperCase().split(',') }")
+    private List<String> valueList;
+
+    @Value("#{'${config.listOfValues}'.toUpperCase() }")
+    private String valueString;
 
     @Value("${config.code}")
     private Integer code;
+
 
     @GetMapping("/baz/{message}")
     public ParamsDto baz ( @PathVariable String message ) {
@@ -68,7 +74,8 @@ public class PathVariableController {
         json.put("username", username);
         json.put("code", code);
         json.put("message", message);
-        json.put("listOfValues", listOfValues);
+        json.put("listOfValues", valueList);
+        json.put("valueString", valueString);
 
         return json;
         
